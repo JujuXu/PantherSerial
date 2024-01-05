@@ -1,0 +1,184 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": true,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 4,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "helha.panther.PantherController",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_796628930 { 
+   	label=panther
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Data1517631336[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Data</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ read(p: SerialPort): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ send(str: String, p: SerialPort)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PantherApp1517631336[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PantherApp</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sendLog(str: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ start(stage: Stage)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+PantherController1517631336[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)PantherController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   armBackward: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armDown: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armForward: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armHome: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armRotLeft: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armRotRight: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armUp: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armWristDown: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   armWristUp: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   backward: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   battery100: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   battery33: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   battery66: Rectangle [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   clampLoosen: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   clampTighten: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   forward: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   frontProximity: QuadCurve [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   left: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   leftProximity: QuadCurve [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mainAnchor: AnchorPane [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   mediaRover: MediaView [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   resolutionSliders: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   right: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rightProximity: QuadCurve [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   servosAngles: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   showServo1: HBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   showServo2: HBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   showServo3: HBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   showServo4: HBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   showServo5: HBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   showServo6: HBox [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sliderArmFB: Slider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sliderArmRot: Slider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sliderArmUpDown: Slider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sliderArmWrist: Slider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   sliderClamp: Slider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   sliderSpeed: Slider [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   speedDown: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   speedUp: ToggleButton [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textBattery: Text [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textFrontProximity: Text [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textLeftProximity: Text [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textRightProximity: Text [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   textSpeed: Text [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ initialize()</TD></TR>
+<TR><TD ALIGN="LEFT" >- keyboardPressed(event: KeyEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >- keyboardReleased(event: KeyEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >- servosAnglesPressed(event: ActionEvent)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+PantherController1517631336 -> PantherApp1517631336[label="initialize() -> sendLog()"];
+    
+}
+@enduml
