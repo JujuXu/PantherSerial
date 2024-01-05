@@ -178,7 +178,7 @@ public class PantherController {
      * @param event the KeyEvent that triggered the method call
      */
     @FXML
-    void keyboardPressed(KeyEvent event) {
+    private void keyboardPressed(KeyEvent event) {
         KeyCode code = event.getCode();
 
         if (code == KeyCode.Z) {
@@ -341,7 +341,7 @@ public class PantherController {
      * @param event the KeyEvent that triggered the method call
      */
     @FXML
-    void keyboardReleased(KeyEvent event) {
+    private void keyboardReleased(KeyEvent event) {
         KeyCode code = event.getCode();
 
         if (code == KeyCode.Z) {
@@ -419,7 +419,7 @@ public class PantherController {
      * @param event the ActionEvent that triggered the method call
      */
     @FXML
-    void servosAnglesPressed(ActionEvent event) {
+    private void servosAnglesPressed(ActionEvent event) {
         if(servosAngles.isSelected()) {
             showServo1.setVisible(true);
             showServo2.setVisible(true);
@@ -440,7 +440,7 @@ public class PantherController {
     /**
      * This method is called to update the text on the GUI with the front proximity reading from the sensor.
      */
-    public void setTextFrontProximity(){
+    private void setTextFrontProximity(){
         textFrontProximity.setText(Data.read(Port.getPort()) + " cm");
     }
 }

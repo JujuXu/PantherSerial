@@ -1,5 +1,6 @@
 package helha.panther;
 
+import java.time.ZonedDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,11 +13,16 @@ public class ResetPort extends TimerTask {
      * This method is called automatically by the timer.
      * It resets the serial port and then schedules another task to run in one minute.
      */
+
+    double time;
     @Override
     public void run() {
         try {
+            time = java.time.Instant.now().toEpochMilli();
             Port.closePort();
             Port.setup();
+            time = java.time.Instant.now().toEpochMilli() - time;
+            PantherApp.sendLog("Reseted connection in "+time+" ms.");
         } catch (Exception e) {
             PantherApp.sendLog("Failed to reset Serial Port " + Port.getPort());
         }
