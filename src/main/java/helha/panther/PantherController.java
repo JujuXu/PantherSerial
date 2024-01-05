@@ -37,16 +37,15 @@ public class PantherController {
         sliderSpeed.setMax(resolutionSliders);
 
         // Unit test
-        /*
-        System.out.println("Connection established: "+Port.setup()); // false if not established
-        System.out.println("Get port: "+Port.getPort()); // User-Specified-Port if not established
+/*
+        PantherApp.sendLog("Connection established: "+Port.setup()); // false if not established
+        PantherApp.sendLog("Get port: "+Port.getPort()); // User-Specified-Port if not established
 
-        System.out.println("Data sent: "+Data.send("test",Port.getPort())); // false is not sent
-        System.out.println("Data read: "+Data.read(Port.getPort())); // "" if not read
-        */
+        PantherApp.sendLog("Data sent: "+Data.send("test",Port.getPort())); // false is not sent
+        PantherApp.sendLog("Data read: "+Data.read(Port.getPort())); // "" if not read
 
-        System.out.println("Connection closed: "+Port.closePort()); // false if still open
-
+        PantherApp.sendLog("Connection closed: "+Port.closePort()); // false if still open
+*/
         // setup the communication with the robot
         Port.setup();
 
