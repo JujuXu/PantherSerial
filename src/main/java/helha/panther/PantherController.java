@@ -41,6 +41,17 @@ public class PantherController {
 
         // reset the port every minute
         new Timer().schedule(new ResetPort(), 60 * 1000);
+
+        // Unit test
+        /*
+        System.out.println("Connection established: "+Port.setup()); // false if not established
+        System.out.println("Get port: "+Port.getPort()); // User-Specified-Port if not established
+
+        System.out.println("Data sent: "+Data.send("test",Port.getPort())); // false is not sent
+        System.out.println("Data read: "+Data.read(Port.getPort())); // "" if not read
+
+        System.out.println("Connection closed: "+Port.closePort()); // false if still open
+        */
     }
 
     @FXML

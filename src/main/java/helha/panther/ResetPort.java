@@ -1,6 +1,5 @@
 package helha.panther;
 
-import java.time.ZonedDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,8 +18,10 @@ public class ResetPort extends TimerTask {
     public void run() {
         try {
             time = java.time.Instant.now().toEpochMilli();
+
             Port.closePort();
             Port.setup();
+
             time = java.time.Instant.now().toEpochMilli() - time;
             PantherApp.sendLog("Reseted connection in "+time+" ms.");
         } catch (Exception e) {

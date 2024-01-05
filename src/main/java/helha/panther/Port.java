@@ -16,7 +16,7 @@ public class Port {
      * Sets up the serial port by opening it, configuring it, and checking if it is open.
      * If the port is not open, an error is logged.
      */
-    public static void setup() {
+    public static boolean setup() {
         if(port.openPort()) {
             port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING,0,0);
             port.setComPortParameters(baudRate, Byte.SIZE, SerialPort.ONE_STOP_BIT,SerialPort.NO_PARITY);
@@ -25,6 +25,8 @@ public class Port {
         } else {
             PantherApp.sendLog("Unable to open Serial Port "+p);
         }
+
+        return port.isOpen();
     }
 
     /**
@@ -37,10 +39,12 @@ public class Port {
     /**
      * Closes the serial port if it is open. If the port is not open, an error is logged.
      */
-    public static void closePort() {
+    public static boolean closePort() {
         if(port.isOpen()) {
             port.closePort();
             PantherApp.sendLog("Closed Serial Port "+p);
         }
+
+        return !(port.isOpen());
     }
 }

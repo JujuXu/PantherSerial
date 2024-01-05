@@ -14,7 +14,7 @@ public class Data {
      * @param str The data string to be sent.
      * @param p   The SerialPort to which the data is sent.
      */
-    public static void send(String str, SerialPort p) {
+    public static boolean send(String str, SerialPort p) {
         if(p.isOpen()) {
             PrintWriter printWriter = new PrintWriter(p.getOutputStream());
 
@@ -24,8 +24,10 @@ public class Data {
             printWriter.close();
 
             PantherApp.sendLog("Sent data to "+ Port.getPort());
+            return true;
         } else {
             PantherApp.sendLog("Unable to write data to Serial Port "+Port.getPort());
+            return false;
         }
     }
     /**
