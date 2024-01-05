@@ -36,12 +36,6 @@ public class PantherController {
         sliderArmRot.setMax(resolutionSliders);
         sliderSpeed.setMax(resolutionSliders);
 
-        // setup the communication with the robot
-        Port.setup();
-
-        // reset the port every minute
-        new Timer().schedule(new ResetPort(), 60 * 1000);
-
         // Unit test
         /*
         System.out.println("Connection established: "+Port.setup()); // false if not established
@@ -49,9 +43,16 @@ public class PantherController {
 
         System.out.println("Data sent: "+Data.send("test",Port.getPort())); // false is not sent
         System.out.println("Data read: "+Data.read(Port.getPort())); // "" if not read
+        */
 
         System.out.println("Connection closed: "+Port.closePort()); // false if still open
-        */
+
+        // setup the communication with the robot
+        Port.setup();
+
+        // reset the port every minute
+        new Timer().schedule(new ResetPort(), 60 * 1000);
+
     }
 
     @FXML
