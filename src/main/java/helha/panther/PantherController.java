@@ -12,24 +12,23 @@ import javafx.scene.media.MediaView;
 import javafx.scene.shape.QuadCurve;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
-import java.util.ArrayList;
 import java.util.Timer;
 
+/**
+ * This class is the controller for the JavaFX GUI of the Panther robot. It is responsible for
+ * communicating with the robot and updating the GUI elements with sensor readings and user input.
+ */
 public class PantherController {
-
-    ArrayList<ToggleButton> listTB = new ArrayList<>();
-
     private int resolutionSliders = 20;
 
     /**
-     *
-     * @throws IllegalAccessException
+     * This method is called when the JavaFX application initializes.
+     * It sets up the GUI elements and initializes the communication with the robot.
      */
+    public void initialize() {
+        PantherApp.sendLog("Panther HUD initialized !");
 
-    public void initialize () throws IllegalAccessException {
-        System.out.println("Panther HUD initialized !");
-
+        // set the maximum value of the sliders
         sliderArmWrist.setMax(resolutionSliders);
         sliderArmUpDown.setMax(resolutionSliders);
         sliderClamp.setMax(resolutionSliders);
@@ -37,13 +36,11 @@ public class PantherController {
         sliderArmRot.setMax(resolutionSliders);
         sliderSpeed.setMax(resolutionSliders);
 
-
-        listTB.add(speedDown);
-        listTB.add(forward);
-
+        // setup the communication with the robot
         Port.setup();
 
-        new Timer().schedule(new ResetPort(), 60*1000);
+        // reset the port every minute
+        new Timer().schedule(new ResetPort(), 60 * 1000);
     }
 
     @FXML
@@ -175,125 +172,136 @@ public class PantherController {
     private Text textSpeed;
 
     /**
+     * This method is called when a key is pressed on the keyboard.
+     * It sets the state of the buttons and sliders to reflect the current keyboard input.
      *
-     * @param event
-     * @throws IllegalAccessException
+     * @param event the KeyEvent that triggered the method call
      */
-
     @FXML
-    void keyboardPressed(KeyEvent event) throws IllegalAccessException {
-        //System.out.println(event);
+    void keyboardPressed(KeyEvent event) {
         KeyCode code = event.getCode();
 
-        if(code == KeyCode.Z) {
-            if(!forward.isSelected()) {
+        if (code == KeyCode.Z) {
+            if (!forward.isSelected()) {
                 forward.setSelected(true);
                 Data.send("z", Port.getPort());
                 setTextFrontProximity();
             }
         }
-        if(code == KeyCode.Q) {
-            if(!left.isSelected()) {
+
+        if (code == KeyCode.Q) {
+            if (!left.isSelected()) {
                 left.setSelected(true);
                 Data.send("q", Port.getPort());
                 setTextFrontProximity();
             }
         }
-        if(code == KeyCode.S) {
-            if(!backward.isSelected()) {
+
+        if (code == KeyCode.S) {
+            if (!backward.isSelected()) {
                 backward.setSelected(true);
                 Data.send("s", Port.getPort());
                 setTextFrontProximity();
             }
         }
-        if(code == KeyCode.D) {
-            if(!right.isSelected()) {
+
+        if (code == KeyCode.D) {
+            if (!right.isSelected()) {
                 right.setSelected(true);
                 Data.send("d", Port.getPort());
                 setTextFrontProximity();
             }
         }
-        if(code == KeyCode.NUMPAD1) {
+
+        if (code == KeyCode.NUMPAD1) {
             armDown.setSelected(true);
             double value = sliderArmUpDown.getValue();
-            if(value > 0) {
-                sliderArmUpDown.adjustValue(value-1);
+            if (value > 0) {
+                sliderArmUpDown.adjustValue(value - 1);
                 Data.send("j", Port.getPort());
             }
         }
-        if(code == KeyCode.NUMPAD2) {
+
+        if (code == KeyCode.NUMPAD2) {
             armWristDown.setSelected(true);
             double value = sliderArmWrist.getValue();
-            if(value > 0) {
-                sliderArmWrist.adjustValue(value-1);
+            if (value > 0) {
+                sliderArmWrist.adjustValue(value - 1);
                 Data.send("h", Port.getPort());
             }
         }
-        if(code == KeyCode.NUMPAD3) {
+
+        if (code == KeyCode.NUMPAD3) {
             armBackward.setSelected(true);
             double value = sliderArmFB.getValue();
-            if(value > 0) {
-                sliderArmFB.adjustValue(value-1);
+            if (value > 0) {
+                sliderArmFB.adjustValue(value - 1);
                 Data.send("g", Port.getPort());
             }
         }
-        if(code == KeyCode.NUMPAD4) {
+
+        if (code == KeyCode.NUMPAD4) {
             armRotLeft.setSelected(true);
             double value = sliderArmRot.getValue();
-            if(value > 0) {
-                sliderArmRot.adjustValue(value-1);
+            if (value > 0) {
+                sliderArmRot.adjustValue(value - 1);
                 Data.send("r", Port.getPort());
             }
         }
-        if(code == KeyCode.NUMPAD5) {
-            if(!armHome.isSelected()) {
+
+        if (code == KeyCode.NUMPAD5) {
+            if (!armHome.isSelected()) {
                 armHome.setSelected(true);
                 Data.send("m", Port.getPort());
 
-                sliderArmFB.adjustValue(resolutionSliders/2);
-                sliderArmWrist.adjustValue(resolutionSliders/2);
-                sliderArmUpDown.adjustValue(resolutionSliders/2);
-                sliderArmRot.adjustValue(resolutionSliders/2);
+                sliderArmFB.adjustValue(resolutionSliders / 2);
+                sliderArmWrist.adjustValue(resolutionSliders / 2);
+                sliderArmUpDown.adjustValue(resolutionSliders / 2);
+                sliderArmRot.adjustValue(resolutionSliders / 2);
             }
         }
-        if(code == KeyCode.NUMPAD6) {
+
+        if (code == KeyCode.NUMPAD6) {
             armRotRight.setSelected(true);
             double value = sliderArmRot.getValue();
-            if(value < resolutionSliders) {
-                sliderArmRot.adjustValue(value+1);
+            if (value < resolutionSliders) {
+                sliderArmRot.adjustValue(value + 1);
                 Data.send("f", Port.getPort());
             }
         }
-        if(code == KeyCode.NUMPAD7) {
+
+        if (code == KeyCode.NUMPAD7) {
             armUp.setSelected(true);
             double value = sliderArmUpDown.getValue();
-            if(value < resolutionSliders) {
-                sliderArmUpDown.adjustValue(value+1);
+            if (value < resolutionSliders) {
+                sliderArmUpDown.adjustValue(value + 1);
                 Data.send("u", Port.getPort());
             }
         }
-        if(code == KeyCode.NUMPAD8) {
+
+        if (code == KeyCode.NUMPAD8) {
             armWristUp.setSelected(true);
             double value = sliderArmWrist.getValue();
-            if(value < resolutionSliders) {
-                sliderArmWrist.adjustValue(value+1);
+            if (value < resolutionSliders) {
+                sliderArmWrist.adjustValue(value + 1);
                 Data.send("y", Port.getPort());
             }
         }
-        if(code == KeyCode.NUMPAD9) {
+
+        if (code == KeyCode.NUMPAD9) {
             armForward.setSelected(true);
             double value = sliderArmFB.getValue();
-            if(value < resolutionSliders) {
-                sliderArmFB.adjustValue(value+1);
+            if (value < resolutionSliders) {
+                sliderArmFB.adjustValue(value + 1);
                 Data.send("t", Port.getPort());
             }
         }
 
-        if(code == KeyCode.X) {
+        if (code == KeyCode.X) {
             speedDown.setSelected(true);
             double value = sliderSpeed.getValue();
-            if(value > 0) {
-                sliderSpeed.adjustValue(value-1);
+            if (value > 0) {
+                sliderSpeed.adjustValue(value - 1);
                 Data.send("x", Port.getPort());
             }
         }
@@ -301,85 +309,94 @@ public class PantherController {
         if (code == KeyCode.W) {
             speedUp.setSelected(true);
             double value = sliderSpeed.getValue();
-            if(value < resolutionSliders) {
-                sliderSpeed.adjustValue(value+1);
+            if (value < resolutionSliders) {
+                sliderSpeed.adjustValue(value + 1);
                 Data.send("w", Port.getPort());
             }
         }
 
-        if(code == KeyCode.E) {
+        if (code == KeyCode.E) {
             clampTighten.setSelected(true);
             double value = sliderClamp.getValue();
-            if(value < resolutionSliders) {
-                sliderClamp.adjustValue(value+1);
+            if (value < resolutionSliders) {
+                sliderClamp.adjustValue(value + 1);
                 Data.send("a", Port.getPort());
             }
         }
 
-        if(code == KeyCode.A) {
+        if (code == KeyCode.A) {
             clampLoosen.setSelected(true);
             double value = sliderClamp.getValue();
-            if(value > 0) {
-                sliderClamp.adjustValue(value-1);
+            if (value > 0) {
+                sliderClamp.adjustValue(value - 1);
                 Data.send("e", Port.getPort());
             }
         }
     }
 
     /**
+     * This method is called when a key is released on the keyboard.
+     * It sets the state of the buttons and sliders to reflect the current keyboard input.
      *
-     * @param event
+     * @param event the KeyEvent that triggered the method call
      */
-
     @FXML
     void keyboardReleased(KeyEvent event) {
         KeyCode code = event.getCode();
 
-        if(code == KeyCode.Z) {
+        if (code == KeyCode.Z) {
             forward.setSelected(false);
-            setTextFrontProximity();
         }
-        if(code == KeyCode.Q) {
+
+        if (code == KeyCode.Q) {
             left.setSelected(false);
-            setTextFrontProximity();
         }
-        if(code == KeyCode.S) {
+
+        if (code == KeyCode.S) {
             backward.setSelected(false);
-            setTextFrontProximity();
         }
-        if(code == KeyCode.D) {
+
+        if (code == KeyCode.D) {
             right.setSelected(false);
-            setTextFrontProximity();
         }
-        if(code == KeyCode.NUMPAD1) {
+
+        if (code == KeyCode.NUMPAD1) {
             armDown.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD2) {
+
+        if (code == KeyCode.NUMPAD2) {
             armWristDown.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD3) {
+
+        if (code == KeyCode.NUMPAD3) {
             armBackward.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD4) {
+
+        if (code == KeyCode.NUMPAD4) {
             armRotLeft.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD5) {
+
+        if (code == KeyCode.NUMPAD5) {
             armHome.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD6) {
+
+        if (code == KeyCode.NUMPAD6) {
             armRotRight.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD7) {
+
+        if (code == KeyCode.NUMPAD7) {
             armUp.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD8) {
+
+        if (code == KeyCode.NUMPAD8) {
             armWristUp.setSelected(false);
         }
-        if(code == KeyCode.NUMPAD9) {
+
+        if (code == KeyCode.NUMPAD9) {
             armForward.setSelected(false);
         }
 
-        if(code == KeyCode.X) {
+        if (code == KeyCode.X) {
             speedDown.setSelected(false);
         }
 
@@ -387,20 +404,20 @@ public class PantherController {
             speedUp.setSelected(false);
         }
 
-        if(code == KeyCode.E) {
+        if (code == KeyCode.E) {
             clampTighten.setSelected(false);
         }
 
-        if(code == KeyCode.A) {
+        if (code == KeyCode.A) {
             clampLoosen.setSelected(false);
         }
     }
-
     /**
+     * This method is called when the "Servo Angles" button is pressed.
+     * It toggles the visibility of the servo angle boxes.
      *
-     * @param event
+     * @param event the ActionEvent that triggered the method call
      */
-
     @FXML
     void servosAnglesPressed(ActionEvent event) {
         if(servosAngles.isSelected()) {
@@ -421,10 +438,9 @@ public class PantherController {
     }
 
     /**
-     *
+     * This method is called to update the text on the GUI with the front proximity reading from the sensor.
      */
-
-    void setTextFrontProximity(){
+    public void setTextFrontProximity(){
         textFrontProximity.setText(Data.read(Port.getPort()) + " cm");
     }
 }

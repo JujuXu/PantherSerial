@@ -7,11 +7,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main class of the Panther application.
+ */
 public class PantherApp extends Application {
+
     /**
-     * start method is needed to setup the JavaFX interface and display it.
-     * @param stage
-     * @throws IOException
+     * Starts the application.
+     *
+     * @param stage the primary stage of the application
+     * @throws IOException if there is an error loading the FXML file
      */
     @Override
     public void start(Stage stage) throws IOException {
@@ -23,14 +28,19 @@ public class PantherApp extends Application {
     }
 
     /**
-     * main method is the first method called when the program is launched. As PantherApp class is an extension of Application class, the start method is called at start.
-     * @param args
+     * Main method of the application.
+     *
+     * @param args command line arguments
      */
-
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 
+    /**
+     * Writes a message to the console.
+     *
+     * @param str the message to write
+     */
     public static void sendLog(String str) {
         System.out.print(java.time.LocalTime.now().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss:SSS")) + " > ");
         System.out.println(str);

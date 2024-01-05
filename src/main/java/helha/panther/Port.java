@@ -2,42 +2,45 @@ package helha.panther;
 
 import com.fazecast.jSerialComm.SerialPort;
 
-import java.time.ZonedDateTime;
-
+/**
+ * This class provides methods for interacting with a serial port.
+ */
 public class Port {
 
     private static final String p = "COM3";
+    private static final int baudRate = 115200;
 
     static SerialPort port = SerialPort.getCommPort(p);
 
     /**
-     * setup method is called to establish a connection between Java and a COM serial port with the Arduino.
-     * The method uses eeeeeeeeeee
-     * @throws IllegalAccessException
+     * Sets up the serial port by opening it, configuring it, and checking if it is open.
+     * If the port is not open, an error is logged.
      */
-
     public static void setup() {
-        System.out.print(java.time.LocalTime.now().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss:SSS")) + " > ");
-
         if(port.openPort()) {
             port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING,0,0);
-            port.setComPortParameters(115200, Byte.SIZE, SerialPort.ONE_STOP_BIT,SerialPort.NO_PARITY);
+            port.setComPortParameters(baudRate, Byte.SIZE, SerialPort.ONE_STOP_BIT,SerialPort.NO_PARITY);
 
-            System.out.println("Successfully connected to Serial Port "+p);
+            PantherApp.sendLog("Connected to Serial Port "+p);
         } else {
-            System.out.println("Unable to open Serial Port "+p);
+            PantherApp.sendLog("Unable to open Serial Port "+p);
         }
     }
 
     /**
-     *
-     * @return
+     * Returns the serial port.
      */
     public static SerialPort getPort() {
         return port;
     }
 
-    public static void closePort() throws IllegalAccessException {
-        port.closePort();
+    /**
+     * Closes the serial port if it is open. If the port is not open, an error is logged.
+     */
+    public static void closePort() {
+        if(port.isOpen()) {
+            port.closePort();
+            PantherApp.sendLog("Closed Serial Port "+p);
+        }
     }
 }
