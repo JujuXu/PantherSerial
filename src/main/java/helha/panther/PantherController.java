@@ -357,21 +357,25 @@ public class PantherController {
 
         if (code == KeyCode.Z) {
             forward.setSelected(false);
+            Data.send("z", Port.getPort());
             setTextFrontProximity();
         }
 
         if (code == KeyCode.Q) {
             left.setSelected(false);
+            Data.send("q", Port.getPort());
             setTextFrontProximity();
         }
 
         if (code == KeyCode.S) {
             backward.setSelected(false);
+            Data.send("s", Port.getPort());
             setTextFrontProximity();
         }
 
         if (code == KeyCode.D) {
             right.setSelected(false);
+            Data.send("d", Port.getPort());
             setTextFrontProximity();
         }
 
