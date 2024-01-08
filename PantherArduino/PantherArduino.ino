@@ -31,28 +31,30 @@ void setup() {
 
 
 void loop() {
-  Serial.println(ultrasonic.read());
-
  if (Serial.available() > 0) {
     // read the incoming byte:
     incomingByte = Serial.read();
 
     if (incomingByte == 115){ //FOR Z
+      Serial.println(ultrasonic.read());
       digitalWrite(8,HIGH);
       delay(50);
       digitalWrite(8,LOW);
     }
-    if (incomingByte == 113){ //FOR Q 
+    if (incomingByte == 113){ //FOR Q
+      Serial.println(ultrasonic.read());
       digitalWrite(10,HIGH);
       delay(50);
       digitalWrite(10,LOW);
     }
     if (incomingByte == 122){ //FOR S
+      Serial.println(ultrasonic.read());
       digitalWrite(9,HIGH);
       delay(50);
       digitalWrite(9,LOW);
     }
     if (incomingByte == 100){ // FOR D
+      Serial.println(ultrasonic.read());
       digitalWrite(7,HIGH);
       delay(50);
       digitalWrite(7,LOW);
