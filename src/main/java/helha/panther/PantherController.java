@@ -357,18 +357,22 @@ public class PantherController {
 
         if (code == KeyCode.Z) {
             forward.setSelected(false);
+            setTextFrontProximity();
         }
 
         if (code == KeyCode.Q) {
             left.setSelected(false);
+            setTextFrontProximity();
         }
 
         if (code == KeyCode.S) {
             backward.setSelected(false);
+            setTextFrontProximity();
         }
 
         if (code == KeyCode.D) {
             right.setSelected(false);
+            setTextFrontProximity();
         }
 
         if (code == KeyCode.NUMPAD1) {
