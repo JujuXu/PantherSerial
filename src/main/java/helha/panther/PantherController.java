@@ -36,7 +36,7 @@ public class PantherController {
         sliderArmRot.setMax(resolutionSliders);
         sliderSpeed.setMax(resolutionSliders);
 
-        // Unit test
+        // Unit tests
 /*
         PantherApp.sendLog("Connection established: "+Port.setup()); // false if not established
         PantherApp.sendLog("Get port: "+Port.getPort()); // User-Specified-Port if not established
